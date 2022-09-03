@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "d1pin.h"
+#include "d1_wifi_common.h"
 /*
 
   Melody
@@ -24,19 +24,35 @@
 
 #include "pitches.h"
 
-#define PIN_TONE D1_PIN_5
+#define PIN_TONE PIN_5
 
 // notes in the melody:
 int melody[] = {
 
-  NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4
+  //NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4
+  NOTE_G3,
+  NOTE_A3,
+  // __
+  NOTE_C4,
+  NOTE_D4,
+  // __
+  NOTE_E4,
+  NOTE_A4,
+  // __
+  NOTE_G4
+
 };
 
 // note durations: 4 = quarter note, 8 = eighth note, etc.:
 int noteDurations[] = {
-
-  4, 8, 8, 4, 4, 4, 4, 4
+  // 4, 8, 8, 4, 4, 4, 4, 4
+  8, 8,
+  8, 8,
+  8, 8,
+  2
 };
+
+#define TONE_SIZE (sizeof(melody) / sizeof(int))
 
 void setup() {
   Serial.begin(115200);
@@ -48,13 +64,13 @@ void setup() {
 
 void loop() {
 
-  for (int thisNote = 0; thisNote < 8; thisNote++) {
+  for (u_int32_t thisNote = 0; thisNote < TONE_SIZE; thisNote++) {
 
     // to calculate the note duration, take one second divided by the note type.
 
     //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
 
-    int noteDuration = 1000 / noteDurations[thisNote];
+    int noteDuration = 2000 / noteDurations[thisNote];
 
     tone(PIN_TONE, melody[thisNote], noteDuration);
 

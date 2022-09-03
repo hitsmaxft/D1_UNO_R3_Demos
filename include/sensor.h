@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include <DHT.h>
-#include "d1pin.h"
+#include "d1_wifi_common.h"
 
-#define PIN_DATA D1_PIN_4
-#define DHTPIN D1_PIN_4
+#define PIN_DATA PIN_4
+#define DHTPIN PIN_4
 #define DHTTYPE DHT11
 
 
